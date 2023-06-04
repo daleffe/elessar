@@ -52,7 +52,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background: blue;
+  background: #0d6efd;
   width: 0;
   z-index: 10;
 }
@@ -91,7 +91,7 @@
   user-select: none;
 }
 .elessar-delete-confirm {
-  background: red;
+  background: #dc3545;
 }
 body.elessar-resizing, body.elessar-dragging {
   -webkit-touch-callout: none;
