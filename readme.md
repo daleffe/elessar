@@ -1,17 +1,5 @@
-Unmaintained
-===
-
-I do not have time or inclination to work on Elessar. Do not expect me to respond to your issues or pull requests.
-
 Elessar
 =======
-[![Build Status](https://travis-ci.org/quarterto/Elessar.svg?branch=master)](https://travis-ci.org/quarterto/Elessar)
-[![npm](https://img.shields.io/npm/v/elessar.svg)](https://www.npmjs.com/package/elessar)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/quarterto/Elessar)
-[![PayPal](https://img.shields.io/badge/paypal-buy%20me%20a%20beer-blue.svg)](https://paypal.me/quarterto)
-
-![Browser Matrix](https://saucelabs.com/browser-matrix/quarterto.svg)
-
 Draggable multiple range sliders
 ![elessar draggable range demo](demo.gif)
 
