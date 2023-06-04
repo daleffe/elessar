@@ -53,6 +53,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   background: #0d6efd;
+  color: #fff;
   width: 0;
   z-index: 10;
 }
@@ -89,6 +90,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.elessar-selected {
+  background: #198754;
 }
 .elessar-delete-confirm {
   background: #dc3545;
