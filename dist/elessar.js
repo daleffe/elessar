@@ -191,7 +191,9 @@ var Range = Element.extend(vertical).extend({
       this.$el.prepend('<div class="elessar-handle">').append('<div class="elessar-handle">');
       this.on('mouseenter.elessar touchstart.elessar', $.proxy(this.removePhantom, this));
       this.on('mousedown.elessar touchstart.elessar', $.proxy(this.mousedown, this));
+      
       this.on('click', $.proxy(this.click, this));
+      this.on('dblclick', $.proxy(this.dblclick, this));      
     } else {
       this.$el.addClass('elessar-readonly');
     }
@@ -207,9 +209,10 @@ var Range = Element.extend(vertical).extend({
 
     this.range = [];
     this.hasChanged = false;
+    
+    this.clickTimeout = null;
 
     if(this.options.value) this.val(this.options.value);
-
   },
 
   writeLabel: function(text) {
@@ -321,22 +324,58 @@ var Range = Element.extend(vertical).extend({
     ev.stopPropagation();
     ev.preventDefault();
 
+    if (ev.target.className == "elessar-handle" || ev.which > 1) return;
+
     var self = this;
+    
+    if (!this.$el.hasClass('elessar-selected')) {
+      if (this.clickTimeout != null) clearTimeout(this.clickTimeout);
 
-    if(ev.which !== 2 || !this.perant.options.allowDelete) return;
+      $('.elessar-range').removeClass('elessar-selected');
+      this.$el.addClass('elessar-selected');      
+    }
 
-    if(this.deleteConfirm) {
+    if (this.deleteConfirm) {
       this.perant.removeRange(this);
       clearTimeout(this.deleteTimeout);
-    } else {
-      this.$el.addClass('elessar-delete-confirm');
-      this.deleteConfirm = true;
 
-      this.deleteTimeout = setTimeout(function() {
-        self.$el.removeClass('elessar-delete-confirm');
-        self.deleteConfirm = false;
-      }, this.perant.options.deleteTimeout);
-    }
+      this.deleteConfirm = false;      
+
+      return;
+    }    
+
+    if (self.$el.attr('data-dblclick') == 'true') {
+      if (this.clickTimeout != null) clearTimeout(this.clickTimeout);
+
+      if (this.perant.options.allowDelete) {        
+        this.$el.addClass('elessar-delete-confirm');
+        this.deleteConfirm = true;
+
+        this.deleteTimeout = setTimeout(function() {
+          self.$el.removeClass('elessar-delete-confirm');
+          self.deleteConfirm = false;
+        }, this.perant.options.deleteTimeout);          
+      }
+    } else {    
+      self.$el.attr('data-dblclick',true);
+
+      this.clickTimeout = setTimeout(function() {        
+        self.$el.attr('data-dblclick',false);
+
+        if (self.hasOwnProperty('perant')) {
+          if (self.perant.hasOwnProperty('options')) {
+            if (typeof self.perant.options.onClick == 'function') {              
+              self.perant.options.onClick(ev);
+            }
+          }
+        }      
+      },500);
+    }    
+  },
+
+  dblclick: function(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();    
   },
 
   mousedown: function(ev) {
