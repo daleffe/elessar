@@ -5,13 +5,12 @@ Draggable multiple range sliders
 
 Installation
 ------------
-Elessar is available via npm and Bower, and as [standalone files](/dist):
+Elessar is available via NPM, Bower or as [standalone files](/dist):
 
 `npm install elessar` | `bower install elessar`
 ----------------------|------------------------
 
-Elessar requires [jQuery](http://jquery.com). If you're using npm or Bower, it's installed as part of this step. If not: a) why not? they're pretty sweet, b) download it, and I assume you're just using `<script>` tags, so just add a `<script>` tag.
-
+Elessar requires [jQuery](http://jquery.com). If you're using npm or Bower, it's installed as part of this step. If not: a) why not? they're pretty sweet, b) download it, and i assume you're just using `<script>` tags, so just add a `<script>` tag.
 
 Using
 -----
@@ -47,8 +46,9 @@ new RangeBar({
     interval: Infinity, // provide instead of count to specify the space between labels
     label: id // string or function to write as the text of a label. functions are called with normalised values.
   },
+  onClick: undefined, // pass a function to call when range is single-clicked (only available for standalone scripts).
   indicator: null, // pass a function(RangeBar, Indicator, Function?) Value to calculate where to put a current indicator, calling the function whenever you want the position to be recalculated
-  allowDelete: false, // set to true to enable double-middle-click-to-delete
+  allowDelete: false, // set to true to enable double-click-to-delete
   deleteTimeout: 5000, // maximum time in ms between middle clicks
   vertical: false, // if true the rangebar is aligned vertically, and given the class elessar-vertical
   bounds: null, // a function that provides an upper or lower bound when a range is being dragged. call with the range that is being moved, should return an object with an upper or lower key
