@@ -352,6 +352,8 @@ var Range = Element.extend(vertical).extend({
         this.deleteConfirm = true;
 
         this.deleteTimeout = setTimeout(function() {
+          self.$el.attr('data-dblclick',false);
+                    
           self.$el.removeClass('elessar-delete-confirm');
           self.deleteConfirm = false;
         }, this.perant.options.deleteTimeout);          
